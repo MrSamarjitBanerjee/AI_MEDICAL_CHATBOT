@@ -2,16 +2,31 @@
 
 A RAG-powered medical assistant built with Node.js, leveraging embedding models and vector databases for semantic retrieval. The system uses a multi-stage pipeline: document ingestion, chunking, embedding generation, vector indexing, and context-aware response generation via LLMs.
 
-### Key Capabilities
-
-1. **User Authentication**: Secure signup/login with JWT tokens
-2. **AI Chat**: Real-time conversations using OpenAI GPT-4 Turbo
-3. **Document Intelligence**: Upload PDFs and get context-aware answers
-4. **Vector Search**: RAG (Retrieval-Augmented Generation) for accurate responses
-5. **Chat History**: Persistent conversation storage
-
+Key Technologies
+Component	Purpose
+Node.js	Backend runtime
+Embedding Model	Converts text to vectors (text-embedding-3-small)
+Vector Database	Stores and searches embeddings efficiently
+LLM API	Generates intelligent responses (GPT-4, etc.)
+Express.js	REST API framework
 
 ### Tech Stack
+
+
+---
+
+## 📦 Dependencies & Technologies
+
+ Organized by Category:
+🤖 AI & LLM Services - OpenAI, Groq, HuggingFace
+🗄️ Vector Database - Pinecone
+📄 Document Processing - PDF parsing & generation tools
+🌐 Backend Framework - Express, Axios, form-data
+🔐 Security & Auth - JWT, bcryptjs, CORS, rate-limiting
+💾 Database - Mongoose/MongoDB
+📤 File Upload - Multer
+🛠️ Configuration - dotenv
+
 
 ```
 ┌─────────────────────────────────────────┐
