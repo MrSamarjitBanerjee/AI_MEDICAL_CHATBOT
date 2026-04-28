@@ -18,20 +18,27 @@ Organized by Category:
 
 ## 📦 Dependencies & Technologies
 
-### 🤖 AI & LLM Services
+🤖 AI & LLM Services  
 ├── openai (v6.33.0) # GPT-4 API integration ├── groq-sdk (v1.1.2) # Groq LLM support └── @huggingface/inference (v4.13.15) # HuggingFace model access
+
 🗄️ Vector Database - Pinecone
-└── @pinecone-database/pinecone (v7.1.0) # Vector database for semantic search
+└── @pinecone-database/pinecone (v7.1.0) # Vector database for semantic search  
+
 📄 Document Processing - PDF parsing & generation tools
 ├── pdf-parse (v1.1.1) # PDF text extraction ├── pdfjs-dist (v5.6.205) # PDF rendering & parsing └── pdfkit (v0.18.0) # PDF document generation
+
 🌐 Backend Framework - Express, Axios, form-data
 ├── express (v5.2.1) # REST API framework ├── axios (v1.14.0) # HTTP client for API calls └── form-data (v4.0.5) # Multipart form data handling
+
 🔐 Security & Auth - JWT, bcryptjs, CORS, rate-limiting
 ├── jsonwebtoken (v9.0.3) # JWT token generation & verification ├── bcryptjs (v3.0.3) # Password hashing & encryption ├── cors (v2.8.6) # Cross-Origin Resource Sharing └── express-rate-limit (v8.3.2) # Rate limiting middleware
+
 💾 Database - Mongoose/MongoDB
 └── mongoose (v9.4.1) # MongoDB object modeling
+
 📤 File Upload - Multer
 └── multer (v2.1.1) # Middleware for file uploads
+
 🛠️ Configuration - dotenv
 └── dotenv (v17.4.0) # Environment variable managemen
 
