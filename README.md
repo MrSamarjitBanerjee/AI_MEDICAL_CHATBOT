@@ -10,14 +10,9 @@ Vector Database	Stores and searches embeddings efficiently
 LLM API	Generates intelligent responses (GPT-4, etc.)
 Express.js	REST API framework
 
-### Tech Stack
-
-
----
-
 ## 📦 Dependencies & Technologies
 
- Organized by Category:
+Organized by Category:
 🤖 AI & LLM Services - OpenAI, Groq, HuggingFace
 🗄️ Vector Database - Pinecone
 📄 Document Processing - PDF parsing & generation tools
@@ -28,6 +23,14 @@ Express.js	REST API framework
 🛠️ Configuration - dotenv
 
 
+
+
+
+### Tech Stack
+ 
+
+
+---
 ```
 ┌─────────────────────────────────────────┐
 │        Frontend/Client Layer             │
