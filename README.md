@@ -2,65 +2,152 @@
 
 A RAG-powered medical assistant built with Node.js, leveraging embedding models and vector databases for semantic retrieval. The system uses a multi-stage pipeline: document ingestion, chunking, embedding generation, vector indexing, and context-aware response generation via LLMs.
 
-## Features
+### Key Capabilities
 
-- 🏥 **Medical Knowledge Base** - Semantic search across medical documents
-- 🔍 **Smart Retrieval** - RAG-powered context-aware responses
-- 📄 **Document Processing** - Automatic chunking and embedding generation
-- 🤖 **LLM Integration** - Multi-model support for response generation
-- ⚡ **Fast Search** - Vector database optimization for quick retrieval
-- 🔐 **Enterprise Ready** - Scalable and secure architecture
+1. **User Authentication**: Secure signup/login with JWT tokens
+2. **AI Chat**: Real-time conversations using OpenAI GPT-4 Turbo
+3. **Document Intelligence**: Upload PDFs and get context-aware answers
+4. **Vector Search**: RAG (Retrieval-Augmented Generation) for accurate responses
+5. **Chat History**: Persistent conversation storage
 
-## System Architecture
+
+### Tech Stack
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     USER INTERFACE                               │
-│                   (Chat Input/Query)                             │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    QUERY PROCESSING                              │
-│         (Text Cleaning, Preprocessing, Intent Detection)        │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    EMBEDDING GENERATION                          │
-│              (Convert Query to Vector Embeddings)               │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  VECTOR DATABASE SEARCH                          │
-│         (Semantic Similarity & Retrieve Top-K Documents)        │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   CONTEXT ASSEMBLY                               │
-│     (Combine Retrieved Documents + User Query into Prompt)      │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  LLM RESPONSE GENERATION                         │
-│     (Generate Medical Response with Retrieved Context)          │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│              RESPONSE VALIDATION & FORMATTING                    │
-│          (Verify Medical Accuracy & Format Output)              │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-                             ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    USER RESPONSE                                 │
-│                   (Chatbot Answer)                               │
-└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────┐
+│        Frontend/Client Layer             │
+│    (Not included in this project)        │
+└──────────────┬──────────────────────────┘
+               │ HTTP/REST API
+┌──────────────▼──────────────────────────┐
+│      Express.js Web Server               │
+│      (server.js - Port 5000)             │
+└──────────────┬──────────────────────────┘
+               │
+    ┌──────────┼──────────┐
+    │          │          │
+    ▼          ▼          ▼
+┌────────┐ ┌──────────┐ ┌────────────┐
+│MongoDB │ │ OpenAI  │ │ Pinecone   │
+│Database│ │   API   │ │ Vector DB  │
+└────────┘ └──────────┘ └────────────┘
 ```
+
+---
+
+# AI Medical Chatbot - Project Overview
+
+## **How It Works (End-to-End)**
+
+### **1. Document Ingestion Phase**
+- Medical documents (PDFs, text files, JSON) are loaded into the system
+- Documents are parsed and extracted for text content
+- Large documents are split into manageable chunks.
+
+### **2. Embedding Generation**
+- Each document chunk is converted into a numerical vector (embedding) using an embedding model
+- These embeddings capture the semantic meaning of the text
+- Embeddings are stored in a vector database (Pinecone, Weaviate, etc.) with their metadata
+
+### **3. Query Processing**
+When a user asks a question:
+- The query text is cleaned and preprocessed
+- The same embedding model converts the user query into a vector
+- The system searches the vector database for similar embeddings (semantic similarity search)
+- Top-K most relevant document chunks are retrieved based on cosine similarity
+
+### **4. Context Assembly**
+- Retrieved medical documents are combined with the original query
+- A prompt is constructed: "Here is relevant medical context: [documents]. Now answer this question: [user query]"
+- This provides the LLM with specific, relevant information
+
+### **5. LLM Response Generation**
+- The assembled prompt is sent to a Large Language Model (Grok,GPT-4, Cohere, etc.)
+- The LLM generates a medical response using:
+  - The retrieved relevant documents (grounded information)
+  - Its trained knowledge
+  - Medical context from the prompt
+
+### **6. Response Delivery**
+- Response is validated for medical accuracy
+- Formatted and returned to the user
+- System logs the interaction for improvement
+---
+
+**Result:** Accurate, trustworthy medical chatbot powered by real medical data! 🏥
+
+
+
+
+
+
+
+
+
+## Architecture & Workflow
+
+### Overall System Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                    USER REQUEST                          │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │         Express.js Server (server.js)            │  │
+│  │  - Routes requests to appropriate endpoints      │  │
+│  │  - Applies middleware (auth, rate limit, error)  │  │
+│  └──────────────┬───────────────────────────────────┘  │
+│                 │                                       │
+│        ┌────────▼─────────┐                            │
+│        │   Middlewares    │                            │
+│        ├──────────────────┤                            │
+│        │ - Auth Check     │                            │
+│        │ - Rate Limiting  │                            │
+│        │ - Error Handling │                            │
+│        └────────┬─────────┘                            │
+│                 │                                       │
+│        ┌────────▼─────────────────┐                    │
+│        │    Router Selection      │                    │
+│        ├──────────────────────────┤                    │
+│        │ /api/auth -> authRoutes  │                    │
+│        │ /api/chat -> chatRoutes  │                    │
+│        │ /api/rag -> ragRoutes    │                    │
+│        └────────┬─────────────────┘                    │
+│                 │                                       │
+│        ┌────────▼──────────────┐                       │
+│        │    Controllers        │                       │
+│        ├──────────────────────┤                        │
+│        │ - authController     │                        │
+│        │ - chatController     │                        │
+│        │ - ragController      │                        │
+│        └────────┬──────────────┘                       │
+│                 │                                       │
+│        ┌────────▼──────────────────┐                   │
+│        │      Services             │                   │
+│        ├────────────────────────────┤                   │
+│        │ - llmService              │                   │
+│        │ - embeddingService        │                   │
+│        │ - ragService              │                   │
+│        │ - pdfService              │                   │
+│        └────────┬────────────────────┘                 │
+│                 │                                       │
+│    ┌────────────┼────────────┐                         │
+│    │            │            │                         │
+│    ▼            ▼            ▼                         │
+│  MongoDB    OpenAI API   Pinecone                      │
+│  (Data)     (Intelligence) (Embeddings)               │
+│                                                       │
+└──────────────────────────────────────────────────────┘
+
+
+
+
+
+```
+
+
+
 
 ## Data Pipeline (Document Ingestion)
 
@@ -94,6 +181,35 @@ A RAG-powered medical assistant built with Node.js, leveraging embedding models 
 │  (Index & Store)           │
 └────────────────────────────┘
 ```
+
+
+#### Authentication Flow (Signup/Login)
+```
+Client Request
+      │
+      ▼
+Server Receives POST /api/auth/signup
+      │
+      ▼
+Express Router → authRoutes.js
+      │
+      ▼
+authController.js (signup function)
+      │
+      ├─ Validate email/password
+      ├─ Hash password with bcryptjs
+      ├─ Save to MongoDB
+      └─ Generate JWT token
+      │
+      ▼
+Send Response with Token
+      │
+      ▼
+Client Receives Token (valid for 7 days)
+
+
+
+
 
 ## Prerequisites
 
@@ -140,48 +256,111 @@ NODE_ENV=development
 ## Quick Start
 
 ```bash
-# Start the server
-npm start
-
 # Run tests
 npm test
 
-# Ingest medical documents
-npm run ingest -- --file documents/medical_data.pdf
+# Install new package
+npm install package-name
 
-# Query the chatbot
-npm run query -- "What are the symptoms of diabetes?"
+# Check installed packages
+npm list
+
+# Remove package
+npm uninstall package-name
+
+# Check for security vulnerabilities
+npm audit
+
+# Create database backup (MongoDB)
+mongodump --uri "mongodb://localhost:27017/ai-medical-assistant"
+
+# Restore database
+mongorestore --uri "mongodb://localhost:27017/" dump/
 ```
+
+---
+
 
 ## Project Structure
 
 ```
-AI_MEDICAL_CHATBOT/
-├── src/
-│   ├── api/              # Express routes
-│   ├── services/         # Core business logic
-│   ├── models/           # Data models
-│   ├── utils/            # Helper functions
-│   └── config/           # Configuration files
-├── documents/            # Medical documents
-├── scripts/              # Ingestion & utility scripts
-├── tests/                # Test files
-├── .env.example          # Environment template
-└── package.json          # Dependencies
+AI Medical Assistant/
+│
+├── config/                       # Configuration & connection setup
+│   ├── db.js                    # MongoDB connection
+│   ├── openai.js                # OpenAI client initialization
+│   ├── pinecone.js              # Pinecone client initialization
+│   └── index.js                 # Centralized config exports
+│
+├── controllers/                  # HTTP request handlers
+│   ├── authController.js        # signup(), login()
+│   ├── chatController.js        # handleChat()
+│   └── ragController.js         # uploadPDF(), handleQuery()
+│
+├── middlewares/                  # Express middleware functions
+│   ├── authMiddleware.js        # JWT verification
+│   ├── errorMiddleware.js       # Global error handling
+│   └── rateLimiter.js           # Rate limiting
+│
+├── models/                       # Mongoose database schemas
+│   ├── User.js                  # User schema
+│   ├── ChatMessage.js           # Chat message schema
+│   └── Embedding.js             # Embedding schema
+│
+├── routes/                       # API route definitions
+│   ├── authRoutes.js            # /api/auth endpoints
+│   ├── chatRoutes.js            # /api/chat endpoints
+│   └── ragRoutes.js             # /api/rag endpoints
+│
+├── services/                     # Business logic & external APIs
+│   ├── llmService.js            # OpenAI chat integration
+│   ├── embeddingService.js      # OpenAI embedding generation
+│   ├── ragService.js            # RAG context retrieval
+│   ├── pdfService.js            # PDF text extraction
+│   └── index.js                 # Service exports
+│
+├── utils/                        # Utility functions
+│   ├── jwtUtils.js              # JWT token operations
+│   ├── logger.js                # Logging utility
+│   └── responseHandler.js       # Standardized API responses
+│
+├── node_modules/                # npm dependencies (107 packages)
+│
+├── .env                         # Environment variables (CRITICAL)
+├── .gitignore                   # Git exclusions
+├── package.json                 # Dependencies & scripts
+├── package-lock.json            # Dependency versions lock
+│
+├── server.js                    # Application entry point
+├── test.js                      # Basic test script
+├── comprehensive-test.js        # Full endpoint testing
+│
+├── README.md                    # Project overview
+├── SETUP_GUIDE.md              # Installation & setup
+├── PROJECT_COMPLETION.md        # Completion summary
+└── DEVELOPER_GUIDE.md          # This file
+
+
+```
+---
+
+                
+                    
+```
+-----
+
+---
 ```
 
 ## 📋 Medical Disclaimer
 
-This chatbot is designed for **informational purposes only** and should not replace professional medical advice. Always consult with qualified healthcare professionals for medical decisions.
+This chatbot is designed for **Personal project purposes only** and should not replace professional medical advice. Always consult with qualified healthcare professionals for medical decisions.
 
 ## License
 
 MIT License - See LICENSE file for details
 
-## Contributing
-
-Contributions are welcome! Please submit pull requests to improve the project.
 
 ---
 
-**Built with ❤️ for better healthcare**
+**Built with ❤️ for better healthcare By Samarjit Banerjee**
