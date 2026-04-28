@@ -13,7 +13,13 @@ Express.js	REST API framework
 ## 📦 Dependencies & Technologies
 
 Organized by Category:
-🤖 AI & LLM Services - OpenAI, Groq, HuggingFace
+
+---
+
+## 📦 Dependencies & Technologies
+
+### 🤖 AI & LLM Services
+├── openai (v6.33.0) # GPT-4 API integration ├── groq-sdk (v1.1.2) # Groq LLM support └── @huggingface/inference (v4.13.15) # HuggingFace model access
 🗄️ Vector Database - Pinecone
 📄 Document Processing - PDF parsing & generation tools
 🌐 Backend Framework - Express, Axios, form-data
