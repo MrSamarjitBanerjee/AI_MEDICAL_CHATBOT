@@ -246,42 +246,14 @@ When a user asks a question:
 │  (Index & Store)           │
 └────────────────────────────┘
 ```
-
-
-#### Authentication Flow (Signup/Login)
 ```
-Client Request
-      │
-      ▼
-Server Receives POST /api/auth/signup
-      │
-      ▼
-Express Router → authRoutes.js
-      │
-      ▼
-authController.js (signup function)
-      │
-      ├─ Validate email/password
-      ├─ Hash password with bcryptjs
-      ├─ Save to MongoDB
-      └─ Generate JWT token
-      │
-      ▼
-Send Response with Token
-      │
-      ▼
-Client Receives Token (valid for 7 days)
-
-
-
-
 
 ## Prerequisites
 
 - Node.js >= 18.0.0
-- npm or yarn
-- Vector Database (Pinecone, Weaviate, or Milvus)
-- LLM API Keys (OpenAI, Cohere, or similar)
+- npm 
+- Vector Database (Pinecone)
+- LLM API Keys (Grok,OpenRouter)
 
 ## Installation
 
@@ -304,7 +276,7 @@ Create a `.env` file in the root directory:
 ```env
 # LLM Configuration
 LLM_API_KEY=your_api_key_here
-LLM_MODEL=gpt-4
+LLM_MODEL=gpt-4 // example
 
 # Vector Database
 VECTOR_DB_URL=your_vector_db_url
@@ -321,29 +293,18 @@ NODE_ENV=development
 ## Quick Start
 
 ```bash
-# Run tests
-npm test
-
 # Install new package
-npm install package-name
+npm install
 
 # Check installed packages
 npm list
 
-# Remove package
-npm uninstall package-name
 
 # Check for security vulnerabilities
 npm audit
 
-# Create database backup (MongoDB)
-mongodump --uri "mongodb://localhost:27017/ai-medical-assistant"
-
-# Restore database
-mongorestore --uri "mongodb://localhost:27017/" dump/
-```
-
----
+# start the server
+npm start 
 
 
 ## Project Structure
