@@ -253,7 +253,7 @@ When a user asks a question:
 - Node.js >= 18.0.0
 - npm 
 - Vector Database (Pinecone)
-- LLM API Keys (Grok,OpenRouter)
+- LLM API Keys (Grok,OpenRouter,huggingface)
 
 ## Installation
 
@@ -274,19 +274,27 @@ cp .env.example .env
 Create a `.env` file in the root directory:
 
 ```env
-# LLM Configuration
-LLM_API_KEY=your_api_key_here
-LLM_MODEL=gpt-4 // example
+# Server Configuration
+PORT=5000
 
-# Vector Database
-VECTOR_DB_URL=your_vector_db_url
-VECTOR_DB_KEY=your_vector_db_key
+# MongoDB Configuration
+MONGO_URI=mongodb://localhost:27017/ai-medical-assistant
 
-# Embedding Model
-EMBEDDING_MODEL=text-embedding-3-small
+# JWT Configuration
+JWT_SECRET=
 
-# Server
-PORT=3000
+# Groq Configuration (free llama3-70b for chat)
+GROQ_API_KEY=
+
+# Hugging Face Configuration (free embeddings)
+HUGGINGFACE_API_KEY=
+
+# Pinecone Configuration
+PINECONE_API_KEY=
+PINECONE_ENVIRONMENT=gcp-starter
+PINECONE_INDEX_NAME=medical-assistant-index
+
+# Node Environment
 NODE_ENV=development
 ```
 
