@@ -149,52 +149,6 @@ When a user asks a question:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-## Data Pipeline (Document Ingestion)
-
-```
-```
-┌──────────────────┐
-│  Medical Docs    │
-│  (PDF/TXT/JSON)  │
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────┐
-│   Ingestion      │
-│   (Parse Files)  │
-└────────┬─────────┘
-         │
-         ▼
-┌──────────────────────────┐
-│   Text Chunking          │
-│   (Split into Segments)  │
-└────────┬─────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│  Embedding Generation      │
-│  (Convert to Vectors)      │
-└────────┬───────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│  Vector Database Storage   │
-│  (Index & Store)           │
-└────────────────────────────┘
-```
-```
-
 ## Prerequisites
 
 - Node.js >= 18.0.0
