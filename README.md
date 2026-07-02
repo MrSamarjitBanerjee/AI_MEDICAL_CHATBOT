@@ -18,7 +18,8 @@ Organized by Category:
 ## 📦 Dependencies & Technologies
 
 🤖 AI & LLM Services  
-├── openai (v6.33.0) # GPT-4 API integration ├── groq-sdk (v1.1.2) # Groq LLM support └── @huggingface/inference (v4.13.15) # HuggingFace model access
+├── # Groq LLM support
+└── @huggingface/inference (v4.13.15) # HuggingFace model access
 
 
 
