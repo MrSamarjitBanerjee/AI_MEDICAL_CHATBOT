@@ -93,7 +93,7 @@ Organized by Category:
     │          │          │
     ▼          ▼          ▼
 ┌────────┐ ┌──────────┐ ┌────────────┐
-│MongoDB │ │ OpenAI  │ │ Pinecone   │
+│MongoDB │ │   GROK  │ │ Pinecone   │
 │Database│ │   API   │ │ Vector DB  │
 └────────┘ └──────────┘ └────────────┘
 ```
@@ -156,62 +156,6 @@ When a user asks a question:
 
 
 ## Architecture & Workflow
-
-### Overall System Architecture
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                    USER REQUEST                          │
-├──────────────────────────────────────────────────────────┤
-│                                                          │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │         Express.js Server (server.js)            │  │
-│  │  - Routes requests to appropriate endpoints      │  │
-│  │  - Applies middleware (auth, rate limit, error)  │  │
-│  └──────────────┬───────────────────────────────────┘  │
-│                 │                                       │
-│        ┌────────▼─────────┐                            │
-│        │   Middlewares    │                            │
-│        ├──────────────────┤                            │
-│        │ - Auth Check     │                            │
-│        │ - Rate Limiting  │                            │
-│        │ - Error Handling │                            │
-│        └────────┬─────────┘                            │
-│                 │                                       │
-│        ┌────────▼─────────────────┐                    │
-│        │    Router Selection      │                    │
-│        ├──────────────────────────┤                    │
-│        │ /api/auth -> authRoutes  │                    │
-│        │ /api/chat -> chatRoutes  │                    │
-│        │ /api/rag -> ragRoutes    │                    │
-│        └────────┬─────────────────┘                    │
-│                 │                                       │
-│        ┌────────▼──────────────┐                       │
-│        │    Controllers        │                       │
-│        ├──────────────────────┤                        │
-│        │ - authController     │                        │
-│        │ - chatController     │                        │
-│        │ - ragController      │                        │
-│        └────────┬──────────────┘                       │
-│                 │                                       │
-│        ┌────────▼──────────────────┐                   │
-│        │      Services             │                   │
-│        ├────────────────────────────┤                   │
-│        │ - llmService              │                   │
-│        │ - embeddingService        │                   │
-│        │ - ragService              │                   │
-│        │ - pdfService              │                   │
-│        └────────┬────────────────────┘                 │
-│                 │                                       │
-│    ┌────────────┼────────────┐                         │
-│    │            │            │                         │
-│    ▼            ▼            ▼                         │
-│  MongoDB    OpenAI API   Pinecone                      │
-│  (Data)     (Intelligence) (Embeddings)               │
-│                                                       │
-└──────────────────────────────────────────────────────┘
-
-
 
 
 
