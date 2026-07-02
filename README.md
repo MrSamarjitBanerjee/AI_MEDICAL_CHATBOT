@@ -3,11 +3,11 @@
 A RAG-powered medical assistant built with Node.js, leveraging embedding models and vector databases for semantic retrieval. The system uses a multi-stage pipeline: document ingestion, chunking, embedding generation, vector indexing, and context-aware response generation via LLMs.
 
 Key Technologies:-
-Node.js	Backend runtime
-Embedding Model	Converts text to vectors (text-embedding-3-small)
-Vector Database	Stores and searches embeddings efficiently
-LLM API	Generates intelligent responses (GPT-4, etc.)
-Express.js	REST API framework
+Node.js	for Backend runtime,
+The Embedding Model	Converts text to vectors (text-embedding-3-small).
+The Vector Database	Stores and searches embeddings efficiently.
+The LLM API	Generates intelligent responses (GROK, Llama , GPT-4, etc.).
+Express.js	REST API framework.
 
 ## 📦 Dependencies & Technologies
 
