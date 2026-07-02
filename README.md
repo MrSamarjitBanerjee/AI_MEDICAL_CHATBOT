@@ -386,10 +386,7 @@ AI Medical Assistant/
 
                 
                     
-```
------
 
----
 ```
 
 ## 📋 Medical Disclaimer
