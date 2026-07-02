@@ -155,17 +155,14 @@ When a user asks a question:
 
 
 
-## Architecture & Workflow
 
-
-
-```
 
 
 
 
 ## Data Pipeline (Document Ingestion)
 
+```
 ```
 ┌──────────────────┐
 │  Medical Docs    │
