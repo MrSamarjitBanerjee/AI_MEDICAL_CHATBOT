@@ -324,6 +324,7 @@ npm start
 ## Project Structure
 
 ```
+```
 AI Medical Assistant/
 │
 ├── config/                       # Configuration & connection setup
@@ -382,11 +383,6 @@ AI Medical Assistant/
 
 
 ```
----
-
-                
-                    
-
 ```
 
 ## 📋 Medical Disclaimer
