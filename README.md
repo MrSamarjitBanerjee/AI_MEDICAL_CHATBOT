@@ -4,9 +4,9 @@ A RAG-powered medical assistant built with Node.js, leveraging embedding models 
 
 Key Technologies:-
 Node.js	for Backend runtime,
-The Embedding Model	Converts text to vectors (text-embedding-3-small).
-The Vector Database	Stores and searches embeddings efficiently.
-The LLM API	Generates intelligent responses (GROK, Llama , GPT-4, etc.).
+The Embedding Model	Converts text to vectors (All-MiniLM-L6-V2).
+The Vector Database	Stores (384 dimensions) and searches embeddings efficiently.
+The LLM API	Generates intelligent responses (Groq).
 Express.js	REST API framework.
 
 ## 📦 Dependencies & Technologies
@@ -133,7 +133,7 @@ When a user asks a question:
 - This provides the LLM with specific, relevant information
 
 ### **5. LLM Response Generation**
-- The assembled prompt is sent to a Large Language Model (Grok,GPT-4, Cohere, etc.)
+- The assembled prompt is sent to a Large Language Model ( Groq - Llama-3.1-8B-instant )
 - The LLM generates a medical response using:
   - The retrieved relevant documents (grounded information)
   - Its trained knowledge
