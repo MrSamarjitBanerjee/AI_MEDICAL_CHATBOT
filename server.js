@@ -35,7 +35,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/rag', ragRoutes);
 
-// 404 handler
+
+app.use("/", (req, res) => {
+  res.status(200).json({
+    message:
+      "Application is up and running successfully. Available endpoints: /api/auth, /api/chat, /api/rag",
+  });
+});
 app.use((req, res, next) => {
   res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
