@@ -34,14 +34,19 @@ app.get('/health', (req, res) => res.status(200).json({ status: 'OK', timestamp:
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/rag', ragRoutes);
-
-
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
-    message:
-      "Application is up and running successfully. Available endpoints: /api/auth, /api/chat, /api/rag",
+    success: true,
+    message: "AI Medical Chatbot API is running successfully.",
+    endpoints: {
+      auth: "/api/auth",
+      chat: "/api/chat",
+      rag: "/api/rag",
+    },
   });
 });
+
+
 app.use((req, res, next) => {
   res.status(404).json({ message: `Route ${req.originalUrl} not found` });
 });
