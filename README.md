@@ -8,7 +8,7 @@ The Embedding Model	Converts text to vectors (All-MiniLM-L6-V2).
 The Vector Database	Stores (384 dimensions) and searches embeddings efficiently.
 The LLM API	Generates intelligent responses (Groq).
 Express.js	REST API framework.
-
+Deployed API  on AWS and Render .
 ## 📦 Dependencies & Technologies
 
 Organized by Category:
